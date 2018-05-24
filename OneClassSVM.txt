@@ -1,5 +1,8 @@
 docker run -d --name=app ubuntu bash -c "while true; do sleep 1; done"
 
+seven ubuntu container is created with above command. 
+New application is installed in six of them. The details are below:
+
 root@ip-172-31-18-255:~/agentless-system-crawler# docker ps --format "table {{.ID}} \t {{.Names}} \t{{.Image}} \t {{.Status}}"
 CONTAINER ID         NAMES                      IMAGE                              STATUS
 ff53032fbc11         cassandra-container        poklet/cassandra                   Up 5 hours
@@ -10,11 +13,12 @@ b654d26faadd         sample-python-container    ubuntu                          
 bd75efc968fa         vncserver-container        ubuntu                             Up 25 hours
 eb5ed34a5440         ubuntu-container           ubuntu                             Up 25 hours
 
+Then crawler is run with freqeuncy = -1 to collect a process feature for each container and signature is calculated. 
 
-
+Then crawler is run with freqeuncy = 1/30sec using below command. 
 
 docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER  --features process --frequency 60 --url "file://output/signature"
 
-Anomalies created by : 
+While the crawler is running, the anomalies created by : 
 docker exec -it <containerID> apt-get install iputils-ping
 docker exec -it <containerID> ping localhost
