@@ -14,3 +14,5 @@ eb5ed34a5440         ubuntu-container           ubuntu                          
 
 
 docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER  --features process --frequency 60 --url "file://output/signature"
+
+Anomalies created by : docker exec -it <containerID> ping localhost
