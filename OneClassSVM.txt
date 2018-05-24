@@ -1,43 +1,16 @@
 docker run -d --name=app ubuntu bash -c "while true; do sleep 1; done"
 
-app1 - nothing
-app2 - apt-get -qq update; apt-get install vim
-app3 - apt-get -qq update; apt-get install curl
-app4 - apt-get -qq update; apt-get install gedit
-app5 - apt-get -qq update; apt-get install python
-app6 - apt-get -qq update; apt-get install apache2
-app7 - apt-get -qq update; apt-get install mysql-server
-app8 - apt-get -qq update; apt-get install php
-app9 - apt-get -qq update; apt-get install docker
-app10 - apt-get -qq update; apt-get install ganglia-monitor
+root@ip-172-31-18-255:~/agentless-system-crawler# docker ps --format "table {{.ID}} \t {{.Names}} \t{{.Image}} \t {{.Status}}"
+CONTAINER ID         NAMES                      IMAGE                              STATUS
+ff53032fbc11         cassandra-container        poklet/cassandra                   Up 5 hours
+fac11f42f38a         hadoop-container           sequenceiq/hadoop-docker:2.7.1     Up 6 hours
+09db4fb23005         mysql-container            ubuntu                             Up 25 hours
+5e83424dc6be         apache-container           ubuntu                             Up 25 hours
+b654d26faadd         sample-python-container    ubuntu                             Up 25 hours
+bd75efc968fa         vncserver-container        ubuntu                             Up 25 hours
+eb5ed34a5440         ubuntu-container           ubuntu                             Up 25 hours
 
 
 
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer eb5ed34a5440 --features metric,connection,process,cpu,disk,package,config --url "file://output/app1"
 
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 6f96f5d73e65 --features metric,connection,process,cpu,disk,package,config --url "file://output/app2"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 1870fd66a799 --features metric,connection,process,cpu,disk,package,config --url "file://output/app3"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer bd75efc968fa --features metric,connection,process,cpu,disk,package,config --url "file://output/app4"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer b654d26faadd --features metric,connection,process,cpu,disk,package,config --url "file://output/app5"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 5e83424dc6be --features metric,connection,process,cpu,disk,package,config --url "file://output/app6"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 09db4fb23005 --features metric,connection,process,cpu,disk,package,config --url "file://output/app7"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 705104c8c7fa --features metric,connection,process,cpu,disk,package,config --url "file://output/app8"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer e740a897183b --features metric,connection,process,cpu,disk,package,config --url "file://output/app9"
-
-
-docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER --crawlContainer 4b31277ca80d --features metric,connection,process,cpu,disk,package,config --url "file://output/app10"
+docker run     --privileged     --net=host     --pid=host     -v /cgroup:/cgroup:ro     -v /sys/fs/cgroup:/sys/fs/cgroup:ro     -v /var/lib/docker:/var/lib/docker:ro     -v /var/run/docker.sock:/var/run/docker.sock     -v $PWD/output:/crawler/output     -it crawler --crawlmode OUTCONTAINER  --features process --frequency 60 --url "file://output/signature"
